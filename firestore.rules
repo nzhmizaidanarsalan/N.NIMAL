@@ -1,0 +1,45 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is the admin
+    function isAdmin() {
+      return request.auth != null && (request.auth.token.email == 'admin@nnimal.com' || request.auth.token.email == 'nazhmizaidan05@gmail.com');
+    }
+
+    // Products collection
+    match /products/{productId} {
+      // Anyone can read products
+      allow read: if true;
+      // Only admin can create, update, delete products
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Settings collection (for payment methods)
+    match /settings/{settingId} {
+      // Anyone can read settings (to see payment methods during checkout)
+      allow read: if true;
+      // Only admin can update settings
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Community collection
+    match /community/{communityId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // News collection
+    match /news/{newsId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // About collection
+    match /about/{aboutId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}

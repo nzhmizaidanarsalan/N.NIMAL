@@ -1,0 +1,116 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A product available for purchase",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the product"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the product"
+        },
+        "price": {
+          "type": "number",
+          "description": "Price of the product"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of the product image"
+        },
+        "createdAt": {
+          "type": "timestamp",
+          "description": "When the product was added"
+        }
+      },
+      "required": ["name", "description", "price", "imageUrl"]
+    },
+    "PaymentSettings": {
+      "title": "Payment Settings",
+      "description": "Settings for payment methods",
+      "type": "object",
+      "properties": {
+        "bankAccount": {
+          "type": "string",
+          "description": "Bank account details"
+        },
+        "qrisImageUrl": {
+          "type": "string",
+          "description": "URL of the QRIS image"
+        }
+      }
+    },
+    "CommunityItem": {
+      "title": "Community Item",
+      "description": "A community post or item",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["title", "excerpt", "imageUrl", "order"]
+    },
+    "NewsItem": {
+      "title": "News Item",
+      "description": "A news article or post",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string" },
+        "title": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["date", "title", "excerpt", "order"]
+    },
+    "AboutContent": {
+      "title": "About Content",
+      "description": "Content for the about page",
+      "type": "object",
+      "properties": {
+        "paragraphs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["paragraphs"]
+    }
+  },
+  "firestore": {
+    "products/{productId}": {
+      "schema": {
+        "$ref": "#/entities/Product"
+      },
+      "description": "Collection of products"
+    },
+    "settings/{settingId}": {
+      "schema": {
+        "$ref": "#/entities/PaymentSettings"
+      },
+      "description": "Collection of settings"
+    },
+    "community/{communityId}": {
+      "schema": {
+        "$ref": "#/entities/CommunityItem"
+      },
+      "description": "Collection of community items"
+    },
+    "news/{newsId}": {
+      "schema": {
+        "$ref": "#/entities/NewsItem"
+      },
+      "description": "Collection of news items"
+    },
+    "about/{aboutId}": {
+      "schema": {
+        "$ref": "#/entities/AboutContent"
+      },
+      "description": "Collection of about content"
+    }
+  }
+}
